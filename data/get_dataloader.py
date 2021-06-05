@@ -3,6 +3,11 @@ from . import dataset
 
 
 def get_dataloaders(config):
+    """
+    Function for creating training and validation dataloaders
+    :param config:
+    :return:
+    """
     print("Preparing train reader...")
     train_dataset = dataset.GestureDataset(config, is_train=True)
 

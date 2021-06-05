@@ -48,11 +48,11 @@ class LabelSmoothingCrossEntropy(nn.Module):
 
 def get_loss(config):
     if config.train.label_smoothing:
-        criterion = LabelSmoothingCrossEntropy(config.train.eps).cuda()
+        criterion = LabelSmoothingCrossEntropy(config.train.eps).to('cuda')
     else:
-        criterion = torch.nn.CrossEntropyLoss().cuda()
+        criterion = torch.nn.CrossEntropyLoss().to('cuda')
 
-    criterion_val = torch.nn.CrossEntropyLoss().cuda()
+    criterion_val = torch.nn.CrossEntropyLoss().to('cuda')
 
     return criterion, criterion_val
 

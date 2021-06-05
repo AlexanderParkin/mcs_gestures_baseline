@@ -5,15 +5,19 @@ from tqdm import tqdm
 from utils import AverageMeter
 
 
-def train(model, train_loader, criterion, optimizer, config, epoch):
+def train(model: torch.nn.Module,
+          train_loader: torch.utils.data.DataLoader,
+          criterion: torch.nn.Module,
+          optimizer: torch.optim.Optimizer,
+          config, epoch) -> None:
     """
-    Функция обучения модели для одной эпохи
-    :param model (torch.nn.Model) архитектура модели
-    :param train_loader: dataloader для генерации батчей
-    :param criterion: выбранный критерий для подсчета функции потерь
-    :param optimizer: выбранный оптимайзер для обновления весов
-    :param config: конфигурация обучения
-    :param epoch (int): номер эпохи
+    Model training function for one epoch
+    :param model: model architecture
+    :param train_loader: dataloader for batch generation
+    :param criterion: selected criterion for calculating the loss function
+    :param optimizer: selected optimizer for updating weights
+    :param config: train process configuration
+    :param epoch (int): epoch number
     :return: None
     """
     model.train()
@@ -51,14 +55,17 @@ def train(model, train_loader, criterion, optimizer, config, epoch):
     print('Train process of epoch: {} is done; \n loss: {:.4f}; acc: {:.2f}'.format(epoch, loss_avg, acc_avg))
 
 
-def validation(model, val_loader, criterion, epoch):
+def validation(model: torch.nn.Model,
+               val_loader: torch.utils.data.DataLoader,
+               criterion: torch.nn.Module,
+               epoch) -> None:
     """
-     Функция валидации модели для одной эпохи
-     :param model (torch.nn.Model) архитектура модели
-     :param val_loader: dataloader для генерации батчей
-     :param criterion: выбранный критерий для подсчета функции потерь
-     :param epoch (int): номер эпохи
-     :return: None
+    Model validation function for one epoch
+    :param model: model architecture
+    :param val_loader: dataloader for batch generation
+    :param criterion: selected criterion for calculating the loss function
+    :param epoch (int): epoch number
+    :return: None`
      """
     loss_stat = AverageMeter('Loss')
     acc_stat = AverageMeter('Acc.')

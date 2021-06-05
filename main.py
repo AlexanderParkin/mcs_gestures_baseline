@@ -16,10 +16,10 @@ from train import train, validation
 from utils import convert_dict_to_tuple
 
 
-def main(args):
+def main(args: argparse.Namespace) -> None:
     """
     Run train process of classification model
-    :param args: Namespace
+    :param args: all parameters necessary for launch
     :return: None
     """
     with open(args.cfg) as f:

@@ -22,7 +22,13 @@ CLASS_NAME2LABEL_DICT = {
 }
 
 
-def main(args):
+def main(args: argparse.Namespace) -> None:
+    """
+    Runs the code for detecting all faces in the images from the data list,
+    selecting the largest face and saving the result to json file. If no face is found in the image, skips this image.
+    :param args: all parameters necessary for launch
+    :return:
+    """
     detector = fd.build_detector(args.detector_type,
                                  confidence_threshold=.5,
                                  nms_iou_threshold=.3,

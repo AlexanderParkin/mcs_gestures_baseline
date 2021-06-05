@@ -5,7 +5,14 @@ import json
 import numpy as np
 from tqdm import tqdm
 
-def main(args):
+
+def main(args: argparse.Namespace) -> None:
+    """
+    Running the code for dividing the original training data into training and validation dataset,
+    taking into account parameter 'video_name'.
+    :param args: all parameters necessary for launch
+    :return:
+    """
     with open(args.train_list, 'r') as fin:
         full_train_data = json.load(fin)
 
