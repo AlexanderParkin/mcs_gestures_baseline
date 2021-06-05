@@ -7,7 +7,7 @@ The idea behind baseline solution is to get the largest face in the frame using 
 config - directory for difference yml config files;\
 data - directory with supporting code for creating a dataloaders;\
 models - directory with model initializing code;\
-submission_example - directory with everything you need to prepare a submission zip archive to run the inference on the server.\
+submission_example - directory with everything you need to prepare a submission zip archive to run the inference on the server. You can replace `script.py` with `script_batched.py` to use batches, which will speed up the inference, but can degrade accuracy due to box scaling.\
 main.py - start model training process;\
 requirements.txt - all required packages used in this repository;\
 train.py - training and validation code for the classification task;\

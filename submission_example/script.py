@@ -40,7 +40,7 @@ def load_resnet(path, model_type, num_classes, device='cuda'):
     return model
 
 
-def save_results(scores, save_path):
+def save_results(scores, frame_pathes, save_path):
     result_df = pd.DataFrame({
         'no_gesture': scores[:, 0],
         'stop': scores[:, 1],
@@ -48,7 +48,8 @@ def save_results(scores, save_path):
         'mute': scores[:, 3],
         'ok': scores[:, 4],
         'like': scores[:, 5],
-        'dislike': scores[:, 6]
+        'dislike': scores[:, 6],
+        'frame_path': frame_pathes
     })
 
     result_df.to_csv(save_path, index=False)
@@ -109,9 +110,9 @@ def main(args):
             scores[idx] = out
 
         if idx % 1000 == 0 and idx > 0:
-            save_results(scores, OUT_PATH)
+            save_results(scores, test_df.frame_path.values, OUT_PATH)
 
-    save_results(scores, OUT_PATH)
+    save_results(scores, test_df.frame_path.values, OUT_PATH)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
