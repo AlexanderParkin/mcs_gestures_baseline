@@ -1,0 +1,9 @@
+albumentations==0.5.2
+face-detection@git+https://github.com/hukkelas/DSFD-Pytorch-Inference.git@7bbe1f61ef5cb951a6e55e0a80e4972419edf5ca
+numpy>=1.19.5
+pandas>=1.2.4
+opencv-python==4.5.1.48
+PyYAML==5.4.1
+torch>=1.7.1
+torchvision>=0.8.2
+tqdm==4.56.0
