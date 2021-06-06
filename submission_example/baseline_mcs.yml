@@ -1,11 +1,11 @@
-exp_name: 'baseline_mcs2'
+exp_name: 'baseline_mcs'
 outdir: './experiments/'
 
-cuda_id: '2'
+cuda_id: '0'
 
 dataset:
-    train_annotation_main: './lists/baseline_exp2/train.json'
-    val_annotation_main: './lists/baseline_exp2/val.json'
+    train_annotation_main: './lists/baseline_exp/train.json'
+    val_annotation_main: './lists/baseline_exp/val.json'
     seed: 123
     num_of_classes: 7
     input_size: 224
@@ -23,7 +23,7 @@ train:
     learning_rate: 0.002
     momentum: 0.9
     lr_schedule: 'cosine'
-    n_epoch: 40
+    n_epoch: 21
     label_smoothing: true
     eps: 0.01
     freq_vis: 500
