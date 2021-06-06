@@ -1,7 +1,4 @@
 import cv2
-import torch
-import numpy as np
-import albumentations as albu
 
 
 def image_crop(img, bbox):
@@ -60,34 +57,6 @@ class Crop(object):
         return crop, bbox, annotation
 
 
-class PreparedAug(object):
-    def __init__(self):
-        augs = [
-            albu.HorizontalFlip(p=0.5),
-            albu.Rotate(limit=10, p=0.5),
-            albu.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=40, val_shift_limit=50, p=0.5),
-            albu.GaussianBlur(p=0.4),
-            albu.ToGray(p=0.3)
-        ]
-        self.augs = albu.Compose(augs)
-
-    def __call__(self, image, bbox, annotation):
-        image = self.augs(image=image)['image']
-        return image, bbox, annotation
-
-
-class DefaultAugmentations(object):
-    def __init__(self, config):
-        self.augment = Compose([
-            Crop(crop_coeff=config.dataset.crop_size),
-            Resize(size=config.dataset.input_size),
-            PreparedAug()
-        ])
-
-    def __call__(self, image, bbox, annotation):
-        return self.augment(image, bbox, annotation)
-
-
 class ValidationAugmentations(object):
     def __init__(self, config):
         self.augment = Compose([
@@ -97,19 +66,3 @@ class ValidationAugmentations(object):
 
     def __call__(self, image, bbox, annotation):
         return self.augment(image, bbox, annotation)
-
-
-def get_train_aug(config):
-    if config.dataset.augmentations == 'default':
-        train_augs = DefaultAugmentations(config)
-    else:
-        raise Exception("Unknonw type of augs: {}".format(config.dataset.augmentations))
-    return train_augs
-
-
-def get_val_aug(config):
-    if config.dataset.augmentations_valid == 'default':
-        val_augs = ValidationAugmentations(config)
-    else:
-        raise Exception("Unknonw type of augs: {}".format(config.dataset.augmentations))
-    return val_augs

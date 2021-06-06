@@ -23,7 +23,7 @@ train:
     learning_rate: 0.002
     momentum: 0.9
     lr_schedule: 'cosine'
-    n_epoch: 40
+    n_epoch: 21
     label_smoothing: true
     eps: 0.01
     freq_vis: 500

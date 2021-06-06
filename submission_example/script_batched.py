@@ -1,4 +1,3 @@
-import sys
 import yaml
 from collections import namedtuple
 
@@ -11,8 +10,7 @@ from torchvision import models
 from torchvision import transforms as tfs
 from tqdm import tqdm
 
-from utils import convert_dict_to_tuple
-from data.augmentations import ValidationAugmentations
+from augmentations import ValidationAugmentations
 
 
 def convert_dict_to_tuple(dictionary):
@@ -38,6 +36,7 @@ def load_resnet(path, model_type, num_classes, device='cuda'):
     model.to(device)
     model.eval()
     return model
+
 
 def read_image(image_file):
     img = cv2.imread(image_file, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION)
@@ -112,12 +111,13 @@ def save_results(scores, frame_pathes, save_path):
 
 CONFIG_PATH = './baseline_mcs.yml'
 DETECTOR_TYPE = 'RetinaNetMobileNetV1'
-MODEL_PATH = './model_0023.pth'
+MODEL_PATH = './model_0020.pth'
+INPUT_PATH = 'data/test.csv'
 OUT_PATH = './answers.csv'
 BATCH_SIZE = 32
 NUM_WORKERS = 8
 
-def main(args):
+def main():
     with open(CONFIG_PATH) as f:
         data = yaml.safe_load(f)
     config = convert_dict_to_tuple(data)
@@ -134,7 +134,7 @@ def main(args):
     preproc = tfs.Compose([tfs.ToTensor(), tfs.Normalize(mean=[0.485, 0.456, 0.406],
                                                          std=[0.229, 0.224, 0.225])])
 
-    test_df = pd.read_csv(args[0])
+    test_df = pd.read_csv(INPUT_PATH)
 
     scores = np.zeros((len(test_df), 7), dtype=np.float32)
     scores[:, 0] = 1
@@ -192,4 +192,4 @@ def main(args):
     save_results(scores, test_df.frame_path.values, OUT_PATH)
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
