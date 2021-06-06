@@ -20,15 +20,15 @@ prepare_train_data.py - code for preparing a training dataset, dividing into tra
 Launch the face detector on the entire training set to get a bbox of the largest face. You can skip this step, since we have done it with `train.csv` and also posted the results of all three detectors, combined in [train_with_bboxes.json](https://drive.google.com/file/d/1JCr6gTTPQsq1GnwibJdAUNOQ0q1vesYM/view?usp=sharing)
 ```python
 CUDA_VISIBLE_DEVICES=0 python find_all_faces.py --prefix_path /path/to/your/data --data_list /path/to/train.csv \
-                                                --output_json_path ./lists/train_RetinaResNet50_bboxes.json \
-                                                --detector_type RetinaNetResNet50
+                                                --output_json_path ./lists/train_RetinaNetMobileNetV1_bboxes.json \
+                                                --detector_type RetinaNetMobileNetV1
 ```
 #### 1. Prepare training and validation lists
 When splitting the dataset into training and validation data, it is important to split by video_name, since otherwise very similar frames can get into training and validation.
 ```python
 python prepare_train_data.py --train_data ./lists/train_with_bboxes.json \
                              --output_dir ./lists/baseline_exp/ \
-                             --bbox_key bbox_RetinaNetResNet50 \
+                             --bbox_key bbox_RetinaNetMobileNetV1 \
                              --val_size 0.15
 ```
 
