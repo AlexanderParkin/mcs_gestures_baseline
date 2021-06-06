@@ -25,7 +25,7 @@ def train(model: torch.nn.Module,
     loss_stat = AverageMeter('Loss')
     acc_stat = AverageMeter('Acc.')
 
-    train_iter = tqdm(train_loader, desc='Train', dynamic_ncols=True)
+    train_iter = tqdm(train_loader, desc='Train', dynamic_ncols=True, position=1)
 
     for step, (x, y) in enumerate(train_iter):
         out = model(x.cuda().to(memory_format=torch.contiguous_format))
@@ -72,7 +72,7 @@ def validation(model: torch.nn.Model,
 
     with torch.no_grad():
         model.eval()
-        val_iter = tqdm(val_loader, desc='Val', dynamic_ncols=True)
+        val_iter = tqdm(val_loader, desc='Val', dynamic_ncols=True, position=2)
 
         for step, (x, y) in enumerate(val_iter):
             out = model(x.cuda().to(memory_format=torch.contiguous_format))

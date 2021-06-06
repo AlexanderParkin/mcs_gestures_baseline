@@ -49,12 +49,12 @@ def main(args: argparse.Namespace) -> None:
     print("Done.")
 
     criterion, criterion_val, optimizer, scheduler = utils.get_training_parameters(config, net)
-    train_epoch = tqdm(range(config.train.n_epoch), dynamic_ncols=True, desc='Train')
+    train_epoch = tqdm(range(config.train.n_epoch), dynamic_ncols=True, desc='Epochs', position=0)
 
     # main process
     for epoch in train_epoch:
         train(net, train_loader, criterion, optimizer, config, epoch)
-        validation(net, val_loader, criterion_val, config, epoch)
+        validation(net, val_loader, criterion_val, epoch)
 
         utils.save_checkpoint(net, optimizer, scheduler, epoch, outdir)
         scheduler.step()
