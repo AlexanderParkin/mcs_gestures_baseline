@@ -3,7 +3,7 @@
 This is a repository with a baseline solution for the [MCS2021. Gesture Recognition competition](https://boosters.pro/championship/machinescansee2021).
 In this competition, participants need to train a model to recognize one of 6 gestures (Stop, Victory, Mute, Ok, Like, Dislike), or class No_gesture.
 
-The idea behind baseline solution is to get the largest face in the frame using the [face detector](https://github.com/hukkelas/DSFD-Pytorch-Inference.git), expand the bbox by x2.5 times and train the classifier for 7 classes on the resulting crop (6 gestures + No gesture). If no face is found in the image, then there is no gesture class with a confidence score of 1.0.
+The idea behind baseline solution is to get the largest face in the frame using the [face detector](https://github.com/hukkelas/DSFD-Pytorch-Inference.git), expand the bbox x2.5 times and train the classifier for 7 classes on the resulting crop (6 gestures + No gesture). If no face is found in the image, then there is no gesture class with a confidence score of 1.0.
 
 ## Repository structure
 config - directory for difference yml config files;\
@@ -28,10 +28,11 @@ CUDA_VISIBLE_DEVICES=0 python find_all_faces.py --prefix_path /path/to/your/data
 #### 1. Prepare training and validation lists
 When splitting the dataset into training and validation data, it is important to split by video_name, since otherwise very similar frames can get into training and validation.
 ```python
-python prepare_train_data.py --train_data ./lists/train_with_bboxes.json \
+python prepare_train_data.py --train_list ./lists/train_with_bboxes.json \
                              --output_dir ./lists/baseline_exp/ \
                              --bbox_key bbox_RetinaNetMobileNetV1 \
-                             --val_size 0.15
+                             --val_size 0.15 \
+                             --pp /PATH/TO/TRAIN/DATA/DIRECTORY/
 ```
 
 #### 2. Run model training

@@ -55,7 +55,7 @@ def train(model: torch.nn.Module,
     print('Train process of epoch: {} is done; \n loss: {:.4f}; acc: {:.2f}'.format(epoch, loss_avg, acc_avg))
 
 
-def validation(model: torch.nn.Model,
+def validation(model: torch.nn.Module,
                val_loader: torch.utils.data.DataLoader,
                criterion: torch.nn.Module,
                epoch) -> None:

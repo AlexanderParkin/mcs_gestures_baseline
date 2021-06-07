@@ -53,7 +53,7 @@ def parse_arguments(argv):
     parser.add_argument('--output_dir', type=str, default='./lists/baseline_exp/', help='Path to test list file.')
     parser.add_argument('--bbox_key', type=str, default='bbox_RetinaNetResNet50', help='Which bbox to use')
     parser.add_argument('--val_size', type=float, default=0.15, help='What part of the data to use for validation')
-    parser.add_argument('--pp', type=str, default='',
+    parser.add_argument('--pp', type=str,
                         help='Path to the directory where images from the trainset are unpacked')
     return parser.parse_args(argv)
 
