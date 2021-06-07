@@ -1,3 +1,5 @@
+# Baseline for MCS2021. Gesture Recognition competition
+![Alt text](figures/pipeline.png?raw=true "Baseline pipeline")
 This is a repository with a baseline solution for the [MCS2021. Gesture Recognition competition](https://boosters.pro/championship/machinescansee2021).
 In this competition, participants need to train a model to recognize one of 6 gestures (Stop, Victory, Mute, Ok, Like, Dislike), or class No_gesture.
 
